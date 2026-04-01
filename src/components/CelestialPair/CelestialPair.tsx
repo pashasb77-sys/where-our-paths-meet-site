@@ -148,6 +148,7 @@ export function CelestialPair({ scene, timeline, sceneIndex, sceneCount }: Celes
   const forceStillScene = true;
   const reducedMotion = useReducedMotion() === true || forceStillScene;
   const [viewportMode, setViewportMode] = useState<ViewportMode | null>(null);
+  const [viewportSize, setViewportSize] = useState({ width: 1366, height: 768 });
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -157,13 +158,19 @@ export function CelestialPair({ scene, timeline, sceneIndex, sceneCount }: Celes
     const mediaQueryList = window.matchMedia("(max-width: 640px)");
     const updateViewportMode = () => {
       setViewportMode(viewportModeFromQuery(mediaQueryList.matches));
+      setViewportSize({
+        width: window.innerWidth || 1366,
+        height: window.innerHeight || 768
+      });
     };
 
     updateViewportMode();
     mediaQueryList.addEventListener("change", updateViewportMode);
+    window.addEventListener("resize", updateViewportMode);
 
     return () => {
       mediaQueryList.removeEventListener("change", updateViewportMode);
+      window.removeEventListener("resize", updateViewportMode);
     };
   }, []);
 
@@ -195,6 +202,18 @@ export function CelestialPair({ scene, timeline, sceneIndex, sceneCount }: Celes
       pointerEvents: "auto"
     } as const;
   }, []);
+
+  const sceneCanvas = useMemo(() => {
+    const width = resolvedViewportMode === "mobile" ? 390 : 1366;
+    const height = resolvedViewportMode === "mobile" ? 844 : 768;
+    const scale = Math.min(viewportSize.width / width, viewportSize.height / height);
+
+    return {
+      width,
+      height,
+      scale: Number.isFinite(scale) && scale > 0 ? scale : 1
+    };
+  }, [resolvedViewportMode, viewportSize.height, viewportSize.width]);
 
   const frameScale = scene.finalScreen && timeline.id === "imagine" ? 1.04 : 1;
   const frameOpacity = scene.finalScreen && timeline.id === "imagine" ? 0.9 : 1;
@@ -584,11 +603,23 @@ export function CelestialPair({ scene, timeline, sceneIndex, sceneCount }: Celes
         <div aria-hidden="true" className="absolute inset-0">
           <RootFrame animateOpacity={frameOpacity} animateScale={frameScale} reducedMotion={reducedMotion}>
             {starField}
-            {timeline.id === "never"
-              ? renderNeverScene()
-              : timeline.id === "now"
-                ? renderNowScene()
-                : renderImagineScene()}
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                width: sceneCanvas.width,
+                height: sceneCanvas.height,
+                transform: `translate(-50%, -50%) scale(${sceneCanvas.scale})`,
+                transformOrigin: "center center"
+              }}
+            >
+              {timeline.id === "never"
+                ? renderNeverScene()
+                : timeline.id === "now"
+                  ? renderNowScene()
+                  : renderImagineScene()}
+            </div>
           </RootFrame>
         </div>
       )}
