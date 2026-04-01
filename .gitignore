@@ -1,0 +1,17 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+
+# misc
+.DS_Store
+.env*
+.npm-cache
+.npm-cache-netlify
+*.log
+deploy-*.zip
+installed-apps-report.csv
+installed-apps-report.txt
+tsconfig.tsbuildinfo
