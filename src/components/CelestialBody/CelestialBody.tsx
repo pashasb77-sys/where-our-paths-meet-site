@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Transition } from "framer-motion";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import type { SceneMotionSpec } from "@/data/celestialMotion";
 import type { MotionEasing, StickmanState, ViewportMode } from "@/lib/types";
 
@@ -30,7 +30,7 @@ export interface CelestialBodyProps {
   variant: CelestialVariant;
   tone: CelestialTone;
   size?: number;
-  imageSrc?: string;
+  imageSrc?: string | StaticImageData;
   imageAlt?: string;
   imageRotation?: number;
 }

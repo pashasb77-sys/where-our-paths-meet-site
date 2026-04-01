@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import neverBackgroundImage from "../../../public/images/backgrounds/nasa-xFO2Xt33xgI-unsplash.jpg";
 
-const NEVER_BACKGROUND_URL = "/images/backgrounds/nasa-xFO2Xt33xgI-unsplash.jpg";
+const NEVER_BACKGROUND_URL = neverBackgroundImage.src;
 
 type Props = {
   onBegin: () => void;

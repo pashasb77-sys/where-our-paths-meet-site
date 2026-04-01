@@ -2,14 +2,17 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
+import closingBackgroundImage from "../../../public/images/backgrounds/nasa-7Cz6bWjdlDs-unsplash.jpg";
+import neverBackgroundImage from "../../../public/images/backgrounds/nasa-xFO2Xt33xgI-unsplash.jpg";
+import starryBackgroundImage from "../../../public/images/backgrounds/starry-night-sky-background.jpg";
 import { CelestialPair } from "@/components/CelestialPair/CelestialPair";
 import { FinalMessageScreen } from "@/components/FinalMessageScreen/FinalMessageScreen";
 import { SceneText } from "@/components/SceneText/SceneText";
 import type { SceneData, TimelineData } from "@/lib/types";
 
-const NEVER_BACKGROUND_URL = "/images/backgrounds/nasa-xFO2Xt33xgI-unsplash.jpg";
-const STARRY_BACKGROUND_URL = "/images/backgrounds/starry-night-sky-background.jpg";
-const CLOSING_BACKGROUND_URL = "/images/backgrounds/nasa-7Cz6bWjdlDs-unsplash.jpg";
+const NEVER_BACKGROUND_URL = neverBackgroundImage.src;
+const STARRY_BACKGROUND_URL = starryBackgroundImage.src;
+const CLOSING_BACKGROUND_URL = closingBackgroundImage.src;
 
 type Props = {
   timeline: TimelineData;

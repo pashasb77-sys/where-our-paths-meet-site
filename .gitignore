@@ -15,3 +15,5 @@ deploy-*.zip
 installed-apps-report.csv
 installed-apps-report.txt
 tsconfig.tsbuildinfo
+
+.vercel

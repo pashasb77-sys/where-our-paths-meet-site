@@ -3,6 +3,9 @@
 import { motion, useReducedMotion, type Transition } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import earthProvidedImage from "../../../public/images/celestial/earth-provided.png";
+import imagineEarthImage from "../../../public/images/celestial/imagine-earth.png";
+import moonImage from "../../../public/images/celestial/Moon.png";
 import { EditableSceneObject } from "@/components/EditableSceneObject/EditableSceneObject";
 import { CelestialBody, type CelestialTone, type CelestialVariant } from "@/components/CelestialBody/CelestialBody";
 import { getSceneMotion } from "@/data/celestialMotion";
@@ -15,10 +18,10 @@ import {
 } from "@/lib/celestialLayout";
 import type { SceneData, StickmanState, TimelineData, ViewportMode } from "@/lib/types";
 
-const EARTH_IMAGE_URL = "/images/celestial/earth-provided.png";
-const IMAGINE_EARTH_IMAGE_URL = "/images/celestial/imagine-earth.png";
-const NOW_MOON_IMAGE_URL = "/images/celestial/Moon.png";
-const IMAGINE_MOON_IMAGE_URL = "/images/celestial/Moon.png";
+const EARTH_IMAGE_URL = earthProvidedImage;
+const IMAGINE_EARTH_IMAGE_URL = imagineEarthImage;
+const NOW_MOON_IMAGE_URL = moonImage;
+const IMAGINE_MOON_IMAGE_URL = moonImage;
 
 type CelestialSide = "left" | "right";
 
